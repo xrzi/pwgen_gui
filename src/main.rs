@@ -1,7 +1,8 @@
 mod generator;
-use crate::generator::*;
+mod app;
+
+use crate::app::*;
 
 fn main() {
-    let pass = genpwd(50, STRENTH::Strong);
-    println!("{}", pass);
+    run();
 }
