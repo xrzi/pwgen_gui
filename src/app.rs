@@ -1,6 +1,6 @@
 use crate::generator::*;
 use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Box, Orientation, Label, CheckButton, Button};
+use gtk::{Application, ApplicationWindow, Box, Orientation, Label, CheckButton, Button, SpinButton};
 
 fn gui(app: &Application) {
     let window = ApplicationWindow::builder()
@@ -19,11 +19,15 @@ fn gui(app: &Application) {
     strong_button.set_group(Some(&weak_button));
     strong_button.set_active(true);
 
+    let spin_button = SpinButton::with_range(1.0, 50.0, 1.0);
+
     let password_label = Label::new(Some("Your password: "));
 
     window_box.append(&weak_button);
     window_box.append(&avg_button);
     window_box.append(&strong_button);
+    window_box.append(&spin_button);
+    
     window_box.append(&password_label);
 
     let button = Button::with_label("Generate password");
@@ -33,7 +37,7 @@ fn gui(app: &Application) {
         if weak_button.is_active() {strenth = STRENTH::Weak;}
         if avg_button.is_active() {strenth = STRENTH::Average;}
         else {strenth = STRENTH::Strong;}
-        password_label.set_text(&genpwd(50, strenth));
+        password_label.set_text(&genpwd(spin_button.value() as i32, strenth));
     });
 
     window_box.append(&button);
