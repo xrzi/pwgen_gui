@@ -1,4 +1,3 @@
-use std::ops::Rem;
 use rand;
 
 static LOWERCASE: &str = "abcdefghijklmnopqrstuvwxyz";
